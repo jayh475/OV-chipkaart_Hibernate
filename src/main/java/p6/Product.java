@@ -19,11 +19,7 @@ public class Product {
     private double prijs;
 
     //    @Transient
-    @ManyToMany(cascade = {CascadeType.ALL})
-    @JoinTable(name = "ov_chipkaart_product",
-            joinColumns = {@JoinColumn(name = "product_nummer")},
-            inverseJoinColumns = {@JoinColumn(name = "kaart_nummer")}
-    )
+    @ManyToMany(cascade = {CascadeType.ALL}, mappedBy = "productenBijOv")
     private List<OVChipkaart> ovBijProduct = new ArrayList();
 
     public Product() {

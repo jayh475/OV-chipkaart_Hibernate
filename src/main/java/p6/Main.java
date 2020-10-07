@@ -43,6 +43,7 @@ public class Main {
 
     public static void main(String[] args) throws SQLException {
         testFetchAll();
+        testDAOHibernate();
     }
 
     /**
@@ -65,5 +66,12 @@ public class Main {
             session.close();
         }
     }
+
+    private static void testDAOHibernate(){
+
+    }
+
+
+
 }
 

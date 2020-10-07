@@ -17,8 +17,8 @@ public class Reiziger {
     private Date geboortedatum;
 //    @Transient
 
-    @OneToMany
-    @JoinColumn(name = "reiziger_id")
+
+    @OneToMany(mappedBy = "reiziger", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<OVChipkaart> mijnOVChipkaarten = new ArrayList();
 
     @OneToOne(mappedBy = "reiziger")
