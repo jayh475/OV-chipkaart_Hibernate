@@ -14,6 +14,4 @@ public interface OVChipkaartDAO {
 
     void delete(OVChipkaart ovChipkaart);
 
-    List<OVChipkaart> findByProduct(Product product);
-
 }

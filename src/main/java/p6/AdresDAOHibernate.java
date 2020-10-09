@@ -77,6 +77,7 @@ public class AdresDAOHibernate implements AdresDAO {
 
     @Override
     public List<Adres> findAll() {
-        return null;
+    return  (List<Adres>) session.createQuery("from Adres ").list();
     }
+
 }

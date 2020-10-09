@@ -5,8 +5,8 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity
-@Table(name = "ov_chipkaart")
+@Entity(name = "ov_chipkaart")
+//@Table()
 public class OVChipkaart {
 
     @Id

@@ -48,7 +48,12 @@ public class Main {
         ReizigerDaoHibernate reizigerDaoHibernate = new ReizigerDaoHibernate(session);
         OVChipkaartDAOHibernate ovChipkaartDAOHibernate = new OVChipkaartDAOHibernate(session);
         AdresDAOHibernate adresDAOHibernate = new AdresDAOHibernate(session);
-        testDAOHibernate(productDaoHibernate,reizigerDaoHibernate,ovChipkaartDAOHibernate,adresDAOHibernate);
+
+
+        testDAOHibernateReizigers(reizigerDaoHibernate);
+        testDAOHibernateProduct(productDaoHibernate);
+        testDAOHibernateOVChipkaart(ovChipkaartDAOHibernate,reizigerDaoHibernate);
+        testDAOHibernateAdres(adresDAOHibernate,reizigerDaoHibernate);
 
 
 //        testFetchAll();
@@ -77,19 +82,20 @@ public class Main {
         }
     }
 
-    private static void testDAOHibernate(ProductDaoHibernate productDaoHibernate, ReizigerDaoHibernate reizigerDaoHibernate,OVChipkaartDAOHibernate ovChipkaartDAOHibernate,AdresDAOHibernate adresDAOHibernate) {
+
+    private static void testDAOHibernateReizigers(ReizigerDaoHibernate reizigerDaoHibernate) {
         System.out.println("Test alle reizigers");
-        for(Reiziger reiziger : reizigerDaoHibernate.findAll()){
+        for (Reiziger reiziger : reizigerDaoHibernate.findAll()) {
             System.out.println(reiziger);
         }
         System.out.println("save reizigers");
-         int id = 18;
-         String voorletters = "h.k";
-         String tussenvoegsel = "de";
-         String achternaam = "jansen";
-         String geboortedatum = "1998-11-24";
+        int id = 18;
+        String voorletters = "h.k";
+        String tussenvoegsel = "de";
+        String achternaam = "jansen";
+        String geboortedatum = "1998-11-24";
 
-        Reiziger reiziger = new Reiziger(null ,id,voorletters,tussenvoegsel,achternaam ,Date.valueOf(geboortedatum));
+        Reiziger reiziger = new Reiziger(null, id, voorletters, tussenvoegsel, achternaam, Date.valueOf(geboortedatum));
         reizigerDaoHibernate.save(reiziger);
         System.out.println(reizigerDaoHibernate.findAll().size());
 
@@ -100,7 +106,7 @@ public class Main {
         System.out.println(reizigerDaoHibernate.findById(reiziger.getId()));
 
         System.out.println("find reiziger by geboortedatum");
-        for(Reiziger reiziger1 : reizigerDaoHibernate.findByGbdatum(geboortedatum)){
+        for (Reiziger reiziger1 : reizigerDaoHibernate.findByGbdatum(geboortedatum)) {
             System.out.println(reiziger1);
         }
 
@@ -109,10 +115,9 @@ public class Main {
         System.out.println(reizigerDaoHibernate.findAll().size());
 
 
-
-
         System.out.println("-----------------------------------------------------");
-
+    }
+    private static void testDAOHibernateProduct(ProductDaoHibernate productDaoHibernate ) {
 
         System.out.println("Test alle producten ");
         System.out.println(productDaoHibernate.findAll().size());
@@ -137,22 +142,24 @@ public class Main {
         productDaoHibernate.update(product);
 
 
-
         System.out.println("delete product");
         productDaoHibernate.delete(product);
         System.out.println(productDaoHibernate.findAll().size());
+    }
 
 
+    private static void testDAOHibernateOVChipkaart(OVChipkaartDAOHibernate ovChipkaartDAOHibernate, ReizigerDaoHibernate reizigerDaoHibernate) {
 
         System.out.println("-----------------------------------------------------");
         System.out.println("Test alle ov chipkaarten ");
         System.out.println(ovChipkaartDAOHibernate.findAll().size());
-        for(OVChipkaart ovChipkaart : ovChipkaartDAOHibernate.findAll()){
+        for (OVChipkaart ovChipkaart : ovChipkaartDAOHibernate.findAll()) {
             System.out.println(ovChipkaart);
         }
         System.out.println("test save OV CHIPKAART");
         String geboortedatum1 = "1998-11-24";
         Reiziger sietske = new Reiziger(null, 78, "S", "", "koopman", Date.valueOf(geboortedatum1));
+        reizigerDaoHibernate.save(sietske);
         OVChipkaart sietskesov = new OVChipkaart(13893, Date.valueOf("2021-11-25"), 2, 14, sietske);
         ovChipkaartDAOHibernate.save(sietskesov);
         System.out.println(ovChipkaartDAOHibernate.findAll().size());
@@ -166,10 +173,9 @@ public class Main {
         ovChipkaartDAOHibernate.delete(sietskesov);
         reizigerDaoHibernate.delete(sietske);
         System.out.println(ovChipkaartDAOHibernate.findAll().size());
+    }
 
-
-
-
+    private static void testDAOHibernateAdres(AdresDAOHibernate adresDAOHibernate, ReizigerDaoHibernate reizigerDaoHibernate){
         System.out.println("-------------------------------------------------");
         System.out.println("alle adressen");
         System.out.println(adresDAOHibernate.findAll().size());
@@ -180,7 +186,7 @@ public class Main {
         System.out.println("save adres");
         String gbdatum = "1981-03-14";
         Reiziger sietske1 = new Reiziger(null, 79, "S", "", "doei", Date.valueOf(gbdatum));
-        reizigerDaoHibernate.save(sietske);
+        reizigerDaoHibernate.save(sietske1);
         Adres a1 = new Adres(sietske1, 18, "3812HT", "8", "hoera", "Amersfoort");
         adresDAOHibernate.save(a1);
         System.out.println("aantal na save: "+ adresDAOHibernate.findAll().size());
@@ -194,7 +200,6 @@ public class Main {
         adresDAOHibernate.delete(a1);
         reizigerDaoHibernate.delete(sietske1);
         System.out.println(adresDAOHibernate.findAll().size());
-
 
 
     }
