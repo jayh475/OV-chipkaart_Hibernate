@@ -2,11 +2,11 @@ package p6;
 
 import java.util.List;
 
-public interface ProductDAO {
+public interface ProductDAO<T> {
    List<Product> findAll();
-   boolean save(Product product);
-   boolean update(Product product);
-   boolean delete(Product product);
-   List<Product> findByOVChipkaart(OVChipkaart ovChipkaart);
+   void save(Product product);
+   void update(Product product);
+   void delete(Product product);
+//   List<Product> findByOVChipkaart(OVChipkaart ovChipkaart);
 
 }

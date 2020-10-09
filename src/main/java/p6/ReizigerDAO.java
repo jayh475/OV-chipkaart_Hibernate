@@ -3,11 +3,11 @@ package p6;
 import java.sql.SQLException;
 import java.util.List;
 
-public interface ReizigerDAO {
+public interface ReizigerDAO<T> {
 
-    boolean save(Reiziger reiziger) throws SQLException;
-   boolean update(Reiziger reiziger);
-   boolean delete(Reiziger reiziger);
+    void save(Reiziger reiziger) throws SQLException;
+   void update(Reiziger reiziger);
+   void delete(Reiziger reiziger);
    Reiziger findById(int id);
    List<Reiziger> findByGbdatum(String datum);
    List<Reiziger> findAll();
